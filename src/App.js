@@ -46,7 +46,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://www.freetogame.com/api/games',{mode:'no-cors'})
+    fetch('https://cors-anywhere.herokuapp.com/https://www.freetogame.com/api/games')
     .then((data)=>{
       console.log(data)
       return data.json()
