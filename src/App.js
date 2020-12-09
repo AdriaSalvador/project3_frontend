@@ -3,16 +3,19 @@ import './App.css';
 
 //Dependencias
 import { Link, Route } from 'react-router-dom';
+import { Button } from 'reactstrap';
+import { Navbar, NavItem, NavLink } from 'reactstrap';
 
 //Componentes
-import CreateUserForm from './components/CreateUserForm';
+// import CreateUserForm from './components/CreateUserForm';
 import Home from './components/Home';
 import GamesList from './components/GamesList';
 
 class App extends React.Component {
   
   state = {
-    user: {username: '', password: ''}
+    user: {username: '', password: ''},
+
   }
 
 
@@ -45,30 +48,25 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount() {
-    fetch('https://cors-anywhere.herokuapp.com/https://www.freetogame.com/api/games')
-    .then((data)=>{
-      console.log(data)
-      return data.json()
-    })
-    .then((dataJSON)=>{
-      console.log('2')
-      console.log(dataJSON)
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
-  }
+
 
   render() {
     return (
       <div className="App">
+        <Navbar fixed="top">
+          <Link to="/">
+            <Button color="dark">Home Page</Button>
+          </Link>
 
-        <Link to="/">Home Page</Link>
-        <Link to="/games-list">Games List</Link>
+          <Link to="/games-list">
+            <Button color="dark">Games List</Button>
+          </Link>
+        </Navbar>
+
 
         <Route exact path="/" component={Home} />
         <Route path="/games-list" component={GamesList} />
+
 
         {/* <CreateUserForm 
           submitForm={this.submitForm}

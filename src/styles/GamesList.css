@@ -1,0 +1,18 @@
+.all-games-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0 150px; 
+}
+
+.all-content {
+    margin-top: 50px;
+}
+.card {
+    margin: 10px;   
+}
+
+.card-body {
+    background-color: #32383E;
+}
