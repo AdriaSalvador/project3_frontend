@@ -4,11 +4,11 @@ import './App.css';
 //Dependencias
 import { Link, Route } from 'react-router-dom';
 import { Button } from 'reactstrap';
-import { Navbar, NavItem, NavLink } from 'reactstrap';
+import { Navbar/*, NavItem, NavLink */} from 'reactstrap';
 
 //Componentes
 // import CreateUserForm from './components/CreateUserForm';
-import Home from './components/Home';
+// import Home from './components/Home';
 import GamesList from './components/GamesList';
 import GamesId from './components/GamesId';
 

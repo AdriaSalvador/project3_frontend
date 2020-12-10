@@ -2,10 +2,7 @@ import React from 'react'
 
 import '../styles/GamesId.css'
 
-import {
-    Card, CardImg, CardBody,
-    CardTitle, Badge
-} from 'reactstrap';
+import { Spinner } from 'reactstrap';
 
 class GamesId extends React.Component {
 
@@ -26,26 +23,59 @@ class GamesId extends React.Component {
         })
     }
 
+    stateImages = ()=>{
+        return this.state.gamesInfo.screenshots.map((images, index)=>{
+            return(
+                <img src={images.image} alt={this.state.gamesInfo.title} key={index} />
+            )
+        })
+    }
+
+    minimumRequirements = ()=>{
+        
+            return(
+                <div>
+                    <p>{this.state.gamesInfo.minimum_system_requirements.graphics}</p>
+                    <p>{this.state.gamesInfo.minimum_system_requirements.memory}</p>
+                    <p>{this.state.gamesInfo.minimum_system_requirements.os}</p>
+                    <p>{this.state.gamesInfo.minimum_system_requirements.processor}</p>
+                    <p>{this.state.gamesInfo.minimum_system_requirements.storage}</p>
+                </div>
+                
+            )
+        
+    }
+
+    renderLoadingImage = ()=>{
+        return (
+            <div className="spinner">
+                <Spinner color="secondary" />
+            </div>
+        ) 
+    }
+    
+    
+
     render(){
+        // console.log(this.state.gamesInfo.minimum_system_requirements)
         return(
             <div className="all-content">
+                
+                <img src={this.state.gamesInfo.thumbnail} alt={this.state.gamesInfo.title} />
                 <h2>{this.state.gamesInfo.title}</h2>
+                {this.state.gamesInfo.genre}
+                <br/>
+                {this.state.gamesInfo.platform}
+                <br/>
+                {this.state.gamesInfo.description}
+                <br/>
+                {this.state.gamesInfo.developer}
+                <br/>
+                {this.state.gamesInfo.game_url}
+                <br/>
+                {this.state.gamesInfo.length === 0 ? this.renderLoadingImage() : this.minimumRequirements()}
+                {this.state.gamesInfo.length === 0 ? this.renderLoadingImage() : this.stateImages()}
 
-                <Card className="card border-dark">
-                    
-                        <CardImg id="card-image" src={this.state.gamesInfo.thumbnail} alt={this.state.gamesInfo.title} />
-                        
-                        <CardBody>
-                            <CardTitle id="card-title"tag="h5">{this.state.gamesInfo.title}</CardTitle>
-                            <div className="genre-badge">
-                                <Badge id="badge-genre">{this.state.gamesInfo.genre}</Badge>
-                                <Badge id="badge-genre">{this.state.gamesInfo.platform}</Badge>
-                            </div>
-                        </CardBody>
-                    
-                </Card>
-                    
-                {/* <h2>{this.props.match.params.id}</h2> */}
             </div>
         )
     }
