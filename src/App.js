@@ -10,6 +10,7 @@ import { Navbar, NavItem, NavLink } from 'reactstrap';
 // import CreateUserForm from './components/CreateUserForm';
 import Home from './components/Home';
 import GamesList from './components/GamesList';
+import GamesId from './components/GamesId';
 
 class App extends React.Component {
   
@@ -64,8 +65,9 @@ class App extends React.Component {
         </Navbar>
 
 
-        <Route exact path="/" component={Home} />
-        <Route path="/games-list" component={GamesList} />
+        {/* <Route exact path="/" component={Home} /> */}
+        <Route exact path="/" /*path="/games-list"*/ component={GamesList} />
+        <Route path="/:id" /*path="/games-list"*/ component={GamesId} />
 
 
         {/* <CreateUserForm 
