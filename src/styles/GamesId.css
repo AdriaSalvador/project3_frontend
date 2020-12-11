@@ -1,8 +1,90 @@
 .all-content {
     margin-top: 50px;
+    background-color: #272B30;
 }
 
+.individual-game-container {
+    margin: 0vh 5vw;
+    padding: 5vh 0vw;
+    display: flex;
+    /* flex-wrap: wrap; */
+}
 
+.individual-game-container img{
+    height: 168.750px;
+    width: 300px;
+}
+
+.title-image {
+    height: 50vh;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px 3px rgb(25, 25, 25);
+}
+
+.title-image h2 {
+    margin-top: 1vh;
+    text-shadow: 2px 0px 4px rgb(25, 25, 25);
+}
+
+.title-image img {
+    margin: 0vh 1vw;
+    border: 1px solid rgb(25, 25, 25);
+}
+
+#playGame-button {
+    margin-top: 10vh
+}
+
+.genre-platform {
+    margin-top: 4vh;
+    display: flex;
+    justify-content: space-evenly;
+} 
+
+#genre {
+    padding: 5px 10px;
+    font-size: x-small;
+    color: #32383E;
+} 
+
+.info-game {
+    margin: 0vh 5vw;
+    display: column;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px 3px rgb(25, 25, 25);
+}
+
+.description {
+    text-align: start;
+    margin: 3vh 4vw 0vh;
+}
+
+.requirements {
+    text-align: start;
+    margin: 0vh 4vw;
+}
+
+.requirements h2 {
+    text-align: start;
+    margin: 0vh 0vw;
+}
+
+#column-requirement {
+    padding: 0vh 6vw 
+}
+
+.screenshots {
+    text-align: space-between;
+    margin: 0vh 4vw;
+}
+
+.screenshots h2{
+    text-align:start
+}
+
+.screenshots img {
+    margin: 2vh 3vw;
+}
 
 
 
