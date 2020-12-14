@@ -4,77 +4,136 @@ import './App.css';
 //Dependencias
 import { Link, Route } from 'react-router-dom';
 import { Button } from 'reactstrap';
-import { Navbar/*, NavItem, NavLink */} from 'reactstrap';
+import { Navbar/*, NavItem, NavLink */ } from 'reactstrap';
 
 //Componentes
-// import CreateUserForm from './components/CreateUserForm';
+import Signup from './components/Signup';
 // import Home from './components/Home';
 import GamesList from './components/GamesList';
 import GamesId from './components/GamesId';
+import Login from './components/Login';
+import UserService from './services/UserService'
 
 class App extends React.Component {
-  
+
   state = {
-    user: {username: '', password: ''},
+    isLogged: {},
+    newUser: { username: '', password: '' },
+    loggingUser: {username: '', password: ''}
+  }
+
+  service = new UserService();
+
+  //SIGNUP CONFIG
+
+  submitSignup = (event) => {
+    event.preventDefault()
+    this.service
+    .signup(this.state.newUser.username, this.state.newUser.password)
+    .then((result)=>{
+      console.log(result);
+    })
+    .catch((err)=>{
+      console.log(err);
+    });
 
   }
 
+  changeHandlerSignup = (_eventTarget) => {
+    if (_eventTarget.name === 'username') {
+      this.setState({ newUser: { ...this.state.newUser, username: _eventTarget.value } })
+    } else if (_eventTarget.name === 'password') {
+      this.setState({ newUser: { ...this.state.newUser, password: _eventTarget.value } })
+    }
+  }
 
+  //LOGIN CONFIG
 
-  submitForm = (event) => {
+  submitLogin = (event) => {
     event.preventDefault()
+    this.service
+      .login(this.state.loggingUser.username, this.state.loggingUser.password)
+      .then(()=>{
+        this.checkIfLoggedIn()
+      })
+      .catch((err)=>{
+        console.log(err);
+      });
+  }
 
-    fetch(/*'https://adriaproject3.herokuapp.com/new-user'*/'http://localhost:3000/new-user', {
-      method: "POST",
-      // mode: "cors",
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(this.state.user)
-    })
+  changeHandlerLogin = (_eventTarget) => {
+    if (_eventTarget.name === 'username') {
+      this.setState({ loggingUser: { ...this.state.loggingUser, username: _eventTarget.value } })
+    } else if (_eventTarget.name === 'password') {
+      this.setState({ loggingUser: { ...this.state.loggingUser, password: _eventTarget.value } })
+    }
+  }
+
+  checkIfLoggedIn = ()=>{
+    this.service.loggedin()
     .then((result)=>{
       console.log(result)
+    })
+  }
+
+  logOut = ()=>{
+    this.service.logout()
+    .then((result)=>{
+      console.log(result)
+      this.checkIfLoggedIn()
     })
     .catch((err)=>{
       console.log(err)
     })
   }
 
-  changeHandler = (_eventTarget) => {
-    if(_eventTarget.name === 'username'){
-      this.setState({user: {...this.state.user, username: _eventTarget.value}})
-    } else if(_eventTarget.name === 'password'){
-      this.setState({user: {...this.state.user, password: _eventTarget.value}}) 
-    }
+  componentDidMount(){
+    this.checkIfLoggedIn();
   }
-
 
 
   render() {
     return (
       <div className="App">
         <Navbar fixed="top">
-          <Link to="/">
+
+          <Link to="/games-list">
             <Button color="dark">Home Page</Button>
           </Link>
 
-          <Link to="/games-list">
-            <Button color="dark">Games List</Button>
+          <Link to="/signup">
+            <Button color="dark">Sign Up</Button>
           </Link>
+
+          <Link to="/login">
+            <Button color="dark">Log In</Button>
+          </Link>
+
+          <Link to="/logout">
+            <Button color="dark" onClick={this.logOut}>Log Out</Button>
+          </Link>
+
         </Navbar>
 
 
-        {/* <Route exact path="/" component={Home} /> */}
-        <Route exact path="/" /*path="/games-list"*/ component={GamesList} />
-        <Route path="/:id" /*path="/games-list"*/ component={GamesId} />
-
-
-        {/* <CreateUserForm 
-          submitForm={this.submitForm}
-          user={this.state.user}
-          changeHandler={this.changeHandler}
-        /> */}
+        <Route exact path="/" component={GamesList} />
+        <Route path="/games-list" component={GamesList} />
+        <Route path="/games-list/:id" component={GamesId} />
+        <Route path="/signup" render={()=>
+          <Signup 
+            submitSignup={this.submitSignup}
+            newUser={this.state.newUser}
+            changeHandlerSignup={this.changeHandlerSignup}
+          />
+        } />
+        <Route path="/login" render={()=>
+          <Login 
+            submitLogin={this.submitLogin}
+            loggingUser={this.state.loggingUser}
+            changeHandlerLogin={this.changeHandlerLogin}
+          />
+        } />
+         
 
       </div>
     );

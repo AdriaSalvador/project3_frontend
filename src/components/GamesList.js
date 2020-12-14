@@ -3,10 +3,7 @@ import React from 'react'
 import '../styles/GamesList.css'
 
 // import { Link } from 'react-router-dom';
-import {
-    Card, CardImg, CardBody,
-    CardTitle, Badge
-} from 'reactstrap';
+import { Card, CardImg, CardBody, CardTitle, Badge} from 'reactstrap';
 import { Spinner } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
