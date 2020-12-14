@@ -72,7 +72,7 @@ class App extends React.Component {
   checkIfLoggedIn = ()=>{
     this.service.loggedin()
     .then((result)=>{
-      console.log(result)
+      this.setState({isLogged: result})
     })
   }
 
@@ -97,7 +97,7 @@ class App extends React.Component {
       <div className="App">
         <Navbar fixed="top">
 
-          <Link to="/games-list">
+          <Link to="/">
             <Button color="dark">Home Page</Button>
           </Link>
 
@@ -116,9 +116,9 @@ class App extends React.Component {
         </Navbar>
 
 
+        {/* <Route path="/games-list" component={GamesList} /> */}
         <Route exact path="/" component={GamesList} />
-        <Route path="/games-list" component={GamesList} />
-        <Route path="/games-list/:id" component={GamesId} />
+        <Route path="/:id" component={GamesId} />
         <Route path="/signup" render={()=>
           <Signup 
             submitSignup={this.submitSignup}
