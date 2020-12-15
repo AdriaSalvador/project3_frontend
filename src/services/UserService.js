@@ -15,24 +15,24 @@ class UserService {
   }
 
   signup = (username, password) => {
-    return this.service.post("/signup", {username, password})
-    .then(response => response.data)
+    return this.service.post("/signup", { username, password })
+      .then(response => response.data)
   }
 
   login = (username, password) => {
     // console.log('login de service')
-    return this.service.post("/login", {username, password})
-    .then(response => response.data)
+    return this.service.post("/login", { username, password })
+      .then(response => response.data)
   }
 
-  loggedin = () =>{
+  loggedin = () => {
     return this.service.get("/loggedin")
-    .then(response => response.data)
+      .then(response => response.data)
   }
 
-  logout = () =>{
+  logout = () => {
     return this.service.post("/logout", {})
-    .then(response => response.data)
+      .then(response => response.data)
   }
 }
 

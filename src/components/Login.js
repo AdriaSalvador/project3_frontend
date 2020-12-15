@@ -3,44 +3,48 @@ import '../styles/Login.css'
 
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-const Login = (props) => {
-    const { submitLogin, loggingUser, changeHandlerLogin } = props
+class Login extends React.Component {
 
-    return (
-        <div className="login">
-       
-            <div className="login-container">
+    render() {
 
-            <h2>Log In</h2>
+        return (
 
-                <Form onSubmit={submitLogin}>
+            <div className="login">
 
-                    <FormGroup className="mb-2 mb-sm-4">
-                        <Label htmlFor="username" className="mb-2">Username</Label>
-                        <Input 
-                            type="text" 
-                            name="username" 
-                            value={loggingUser.username} 
-                            onChange={(event)=>changeHandlerLogin(event.target)} 
-                            placeholder="Enter your Username or Email" />
-                    </FormGroup>
-                    
-                    <FormGroup className="mb-2 mb-sm-4">
-                        <Label for="examplePassword" className="mb-2">Password</Label>
-                        <Input 
-                            type="password" 
-                            name="password" 
-                            value={loggingUser.password} 
-                            onChange={(event)=>changeHandlerLogin(event.target)} 
-                            placeholder="Must have at least 7 characters" />
-                    </FormGroup>
+                <div className="login-container">
+
+                    <h2>Log In</h2>
+
+                    <Form onSubmit={this.props.submitLogin}>
+
+                        <FormGroup className="mb-2 mb-sm-4">
+                            <Label htmlFor="username" className="mb-2">Username</Label>
+                            <Input
+                                type="text"
+                                name="username"
+                                value={this.props.loggingUser.username}
+                                onChange={(event) => this.props.changeHandlerLogin(event.target)}
+                                placeholder="Enter your Username or Email" />
+                        </FormGroup>
+
+                        <FormGroup className="mb-2 mb-sm-4">
+                            <Label for="examplePassword" className="mb-2">Password</Label>
+                            <Input
+                                type="password"
+                                name="password"
+                                value={this.props.loggingUser.password}
+                                onChange={(event) => this.props.changeHandlerLogin(event.target)}
+                                placeholder="Must have at least 7 characters" />
+                        </FormGroup>
 
                         <Button type="submit">Log In</Button>
 
-                </Form> 
+                    </Form>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
+
 }
 
 export default Login

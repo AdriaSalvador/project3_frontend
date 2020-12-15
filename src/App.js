@@ -2,24 +2,25 @@ import React from 'react'
 import './App.css';
 
 //Dependencias
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, Redirect } from 'react-router-dom';
 import { Button } from 'reactstrap';
 import { Navbar/*, NavItem, NavLink */ } from 'reactstrap';
 
 //Componentes
-import Signup from './components/Signup';
 // import Home from './components/Home';
+import Signup from './components/Signup';
 import GamesList from './components/GamesList';
 import GamesId from './components/GamesId';
 import Login from './components/Login';
 import UserService from './services/UserService'
+import Profile from './components/Profile';
 
 class App extends React.Component {
 
   state = {
     isLogged: {},
     newUser: { username: '', password: '' },
-    loggingUser: {username: '', password: ''}
+    loggingUser: { username: '', password: '' }
   }
 
   service = new UserService();
@@ -29,13 +30,13 @@ class App extends React.Component {
   submitSignup = (event) => {
     event.preventDefault()
     this.service
-    .signup(this.state.newUser.username, this.state.newUser.password)
-    .then((result)=>{
-      console.log(result);
-    })
-    .catch((err)=>{
-      console.log(err);
-    });
+      .signup(this.state.newUser.username, this.state.newUser.password)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
   }
 
@@ -53,10 +54,10 @@ class App extends React.Component {
     event.preventDefault()
     this.service
       .login(this.state.loggingUser.username, this.state.loggingUser.password)
-      .then(()=>{
+      .then(() => {
         this.checkIfLoggedIn()
       })
-      .catch((err)=>{
+      .catch((err) => {
         console.log(err);
       });
   }
@@ -69,37 +70,55 @@ class App extends React.Component {
     }
   }
 
-  checkIfLoggedIn = ()=>{
-    this.service.loggedin()
-    .then((result)=>{
-      this.setState({isLogged: result})
-    })
-  }
+  //LOGOUT CONFIG
 
-  logOut = ()=>{
+  logOut = () => {
     this.service.logout()
-    .then((result)=>{
-      console.log(result)
-      this.checkIfLoggedIn()
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
+      .then((result) => {
+        console.log(result)
+        this.checkIfLoggedIn()
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
-  componentDidMount(){
+  //LOGGEDIN
+
+  checkIfLoggedIn = () => {
+    this.service.loggedin()
+      .then((result) => {
+        this.setState({ isLogged: result })
+      })
+  }
+
+  componentDidMount() {
     this.checkIfLoggedIn();
   }
 
+  //AUTH NAVBAR BUTTONS
 
-  render() {
-    return (
-      <div className="App">
-        <Navbar fixed="top">
+  renderButtons = () => {
+ 
+    if (this.state.isLogged.username) {
+      return (
 
-          <Link to="/">
-            <Button color="dark">Home Page</Button>
+        <div>
+
+          <span>{`Welcome, ${this.state.isLogged.username} `}</span>
+          <Link to="/profile">
+            <Button color="dark">Profile</Button>
           </Link>
+          <Link to="/logout">
+            <Button color="dark" onClick={this.logOut}>Log Out</Button>
+          </Link>
+
+        </div>
+      )
+    } else {
+      return (
+
+        <div>
 
           <Link to="/signup">
             <Button color="dark">Sign Up</Button>
@@ -109,31 +128,62 @@ class App extends React.Component {
             <Button color="dark">Log In</Button>
           </Link>
 
-          <Link to="/logout">
-            <Button color="dark" onClick={this.logOut}>Log Out</Button>
+        </div>
+      )
+    }
+  }
+
+  //RENDER
+
+  render() {
+
+    return (
+
+      <div className="App">
+
+        <Navbar fixed="top">
+          <Link to="/">
+            <Button color="dark">Home Page</Button>
           </Link>
 
+          {this.renderButtons()}
         </Navbar>
 
-
-        {/* <Route path="/games-list" component={GamesList} /> */}
         <Route exact path="/" component={GamesList} />
-        <Route path="/:id" component={GamesId} />
-        <Route path="/signup" render={()=>
-          <Signup 
-            submitSignup={this.submitSignup}
-            newUser={this.state.newUser}
-            changeHandlerSignup={this.changeHandlerSignup}
-          />
-        } />
-        <Route path="/login" render={()=>
-          <Login 
-            submitLogin={this.submitLogin}
-            loggingUser={this.state.loggingUser}
-            changeHandlerLogin={this.changeHandlerLogin}
-          />
-        } />
-         
+
+        <Route
+          path="/signup"
+          render={() => (
+            !this.state.isLogged.username
+              ? <Signup submitSignup={this.submitSignup} newUser={this.state.newUser} changeHandlerSignup={this.changeHandlerSignup} />
+              : <Redirect to='/' />
+          )} />
+
+        <Route
+          path="/login"
+          render={(props) => (
+            !this.state.isLogged.username
+              ? <Login submitLogin={this.submitLogin} loggingUser={this.state.loggingUser} changeHandlerLogin={this.changeHandlerLogin} />
+              : <Redirect to='/' />
+          )} />
+
+        {this.state.isLogged._id && <Route path="/profile" render={() => <Profile isLogged={this.state.isLogged} />} />}
+
+        <Route
+          path="/logout"
+          render={() => (
+            this.state.isLogged.username
+              ? <Redirect to='/' />
+              : <Redirect to='/' />
+          )} />
+
+        <Route
+          path="/games/:id"
+          render={(props) => {
+            return (
+              <GamesId {...props} isLogged={this.state.isLogged} />
+            )
+          }} />
 
       </div>
     );
