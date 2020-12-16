@@ -55,7 +55,8 @@ class App extends React.Component {
     event.preventDefault()
     this.service
       .login(this.state.loggingUser.username, this.state.loggingUser.password)
-      .then(() => {
+      .then((response) => {
+        this.setState({isLogged: response})
         this.checkIfLoggedIn()
       })
       .catch((err) => {
@@ -142,20 +143,17 @@ class App extends React.Component {
 
       <div className="App">
 
-
-
         <Navbar fixed="top">
           <div className="navButtons">
-        <NavbarBrand>
-      <img
-        src="/logo.png"
-        width="123"
-        height="30"
-        className="d-inline-block align-center"
-        alt="React Bootstrap logo"
-        
-      />
-    </NavbarBrand >
+          <NavbarBrand>
+            <img
+              src="/logo.png"
+              width="123"
+              height="30"
+              className="d-inline-block align-center"
+              alt="React Bootstrap logo"
+            />
+          </NavbarBrand >
           
           <Link to="/">
             <Button color="dark">Home Page</Button>
