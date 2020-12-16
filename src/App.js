@@ -58,7 +58,7 @@ class App extends React.Component {
       .then((response) => {
         console.log(response)
         this.setState({isLogged: response})
-        this.checkIfLoggedIn()
+        // this.checkIfLoggedIn()
       })
       .catch((err) => {
         console.log(err);
