@@ -22,6 +22,12 @@ class GameService {
     return this.service.get(`/getUser/${userID}`, { userID })
       .then(response => response.data)
   }
+
+  deleteFavGame = (gameID, userID) => {
+    console.log(gameID, userID)
+    return this.service.post("/profile/deleteFavGame/:id", { gameID, userID })
+      .then(response => response.data)
+  }
 }
 
 export default GameService;

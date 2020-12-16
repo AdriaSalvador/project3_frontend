@@ -56,7 +56,7 @@ class App extends React.Component {
     this.service
       .login(this.state.loggingUser.username, this.state.loggingUser.password)
       .then((response) => {
-        console.log(response)
+        // console.log(response)
         this.setState({isLogged: response})
         // this.checkIfLoggedIn()
       })
@@ -182,7 +182,7 @@ class App extends React.Component {
               : <Redirect to='/' />
           )} />
 
-        {this.state.isLogged._id && <Route path="/profile" render={() => <Profile isLogged={this.state.isLogged} />} />}
+        {this.state.isLogged._id && <Route path="/profile" render={(props) => <Profile {...props} isLogged={this.state.isLogged} />} />}
 
         <Route
           path="/logout"

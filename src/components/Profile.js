@@ -13,6 +13,21 @@ class Profile extends React.Component {
 
     service = new GameService()
 
+    deleteFromFavoritos= (idGame) => {
+
+        console.log(idGame, this.props.isLogged._id)
+        
+        this.service.deleteFavGame(idGame, this.props.isLogged._id)
+            .then((result) => {
+                console.log(result)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        
+    }
+
+
     componentDidMount() {
         this.service.getUser(this.props.isLogged._id)
             .then((result) => {
@@ -44,23 +59,26 @@ class Profile extends React.Component {
     renderFavorites = () => {
 
         return this.state.favoritosFull.map((games, index) => {
+            
 
             return (
                 <div>
-                    <Link id="card-link" to={`/games/${games.id}`} key={index}>
-                        <Card className="card border-dark">
-                        
+                    
+                    <Card className="card border-dark">
+                        <Link id="card-link" to={`/games/${games.id}`} key={index}>
                             <CardImg top width="100%" src={games.thumbnail} alt={games.title} />
                             <CardBody>
                                 <CardTitle id="card-title" tag="h5">{games.title}</CardTitle>
                                 <div className="genre-badge">
                                     <Badge id="badge-genre">{games.genre}</Badge>
-                                    <Button color="danger">x</Button>
+                                    
                                     {/* <Badge id="badge-genre">{games.platform}</Badge> */}
                                 </div>
                             </CardBody>
-                        </Card>
-                    </Link>
+                        </Link>
+                        <Button color="danger" onClick={() => this.deleteFromFavoritos(games.id)} /*value={games.id}*/>x</Button>
+                    </Card>
+                    
                 </div>
             )
         })
