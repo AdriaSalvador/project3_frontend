@@ -15,7 +15,7 @@ class Profile extends React.Component {
 
     deleteFromFavoritos= (idGame) => {
 
-        console.log(idGame, this.props.isLogged._id)
+        // console.log(idGame, this.props.isLogged._id)
         
         this.service.deleteFavGame(idGame, this.props.isLogged._id)
             .then((result) => {
@@ -76,7 +76,7 @@ class Profile extends React.Component {
                                 </div>
                             </CardBody>
                         </Link>
-                        <Button color="danger" onClick={() => this.deleteFromFavoritos(games.id)} /*value={games.id}*/>x</Button>
+                        <Button color="danger" onClick={() => this.deleteFromFavoritos(games.id)} >x</Button>
                     </Card>
                     
                 </div>

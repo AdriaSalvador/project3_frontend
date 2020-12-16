@@ -19,7 +19,7 @@ class GamesId extends React.Component {
     service = new GameService()
 
     addToFavoritos = () => {
-        console.log(this.props.match.params.id, this.props.isLogged._id)
+        // console.log(this.props.match.params.id, this.props.isLogged._id)
         this.service.favoritos(this.props.match.params.id, this.props.isLogged._id)
             .then((result) => {
                 console.log(result)
