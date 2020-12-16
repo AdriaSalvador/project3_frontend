@@ -5,7 +5,8 @@ class GameService {
 
   constructor() {
     let service = axios.create({
-      baseURL: "https://adriaproject3.herokuapp.com",
+      //baseURL: "https://adriaproject3.herokuapp.com",
+      baseURL: "http://localhost:3000",
       withCredentials: true
     });
 
@@ -25,7 +26,8 @@ class GameService {
 
   deleteFavGame = (gameID, userID) => {
     // console.log(gameID, userID)
-    return this.service.post(`/deleteFavGame/${gameID}`, { /*gameID, */ userID })
+    console.log('hola 2')
+    return this.service.post(`/deleteFavGame/${gameID}`, { userID })
       .then(response => response.data)
 
   }

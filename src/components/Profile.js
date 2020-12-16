@@ -14,22 +14,21 @@ class Profile extends React.Component {
     service = new GameService()
 
     deleteFromFavoritos= (idGame) => {
-        this.props.isLogged.favoritos.map((fav)=>{
+        // this.props.isLogged.favoritos.map((fav)=>{
             
-            if (fav === idGame){ 
-                this.service.deleteFavGame(idGame, this.props.isLogged._id)
-            }
-        })
-        // console.log(idGame, this.props.isLogged._id)
-        // console.log(this.props.isLogged.favoritos)
+        //     if (fav === idGame){ 
+        //         this.service.deleteFavGame(idGame, this.props.isLogged._id)
+        //     }
+        // })
+        console.log(idGame)
         
-        // this.service.deleteFavGame(idGame, this.props.isLogged._id)
-        //     .then((result) => {
-        //         console.log(result)
-        //     })
-        //     .catch((err) => {
-        //         console.log(err)
-        //     })
+         this.service.deleteFavGame(idGame, this.props.isLogged._id)
+            .then((result) => {
+                console.log(result)
+            })
+             .catch((err) => {
+                console.log(err)
+             })
         
     }
 
