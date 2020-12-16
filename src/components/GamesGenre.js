@@ -1,4 +1,3 @@
-
 import React from 'react'
 import '../styles/GamesList.css'
 
@@ -8,14 +7,15 @@ import { Form, FormGroup} from 'reactstrap';
 import { Spinner } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-class GamesList extends React.Component {
+class GamesGenre extends React.Component {
 
     state = {
         gamesList: []
     }
 
     componentDidMount() {
-        fetch('https://cors-anywhere.herokuapp.com/https://www.freetogame.com/api/games')
+        console.log(this.props.match.params.genre)
+        fetch(`https://cors-anywhere.herokuapp.com/https://www.freetogame.com/api/games?category=${this.props.match.params.genre}`)
             .then((data) => {
                 return data.json()
             })
@@ -29,7 +29,7 @@ class GamesList extends React.Component {
 
     renderGamesList = () => {
         return this.state.gamesList.map((games, index) => {
-
+            
             return (
                 <Link id="card-link" to={`/games/${games.id}`} key={index}>
                     <Card className="card border-dark">
@@ -57,6 +57,7 @@ class GamesList extends React.Component {
     }
 
     handleInputChange(event) {
+        console.log(event.target.value)
         window.location = '/game/' + event.target.value 
     }
 
@@ -66,7 +67,7 @@ class GamesList extends React.Component {
             <div>
                 <Form>
                     <FormGroup>
-                        <label htmlFor="genreSelect" className="label">Select Genre</label>
+                    <label htmlFor="genreSelect" className="label">Select Genre</label>
                         <select type="select" name="game" id="genreSelect" onChange={this.handleInputChange}>
                             <option value="All Genres">All Genres</option>
                             <option value="Shooter">Shooter</option>
@@ -91,7 +92,7 @@ class GamesList extends React.Component {
     render() {
         return (
             <div className="all-content">
-
+                
                 <h2>Free to Play Games</h2>
                 <br/>
                 {this.gamesGenre()}
@@ -105,10 +106,4 @@ class GamesList extends React.Component {
 
 }
 
-export default GamesList
-
-
-
-
-
-
+export default GamesGenre

@@ -15,6 +15,7 @@ import GamesId from './components/GamesId';
 import Login from './components/Login';
 import UserService from './services/UserService'
 import Profile from './components/Profile';
+import GamesGenre from './components/GamesGenre';
 
 class App extends React.Component {
 
@@ -197,6 +198,14 @@ class App extends React.Component {
           render={(props) => {
             return (
               <GamesId {...props} isLogged={this.state.isLogged} />
+            )
+          }} />
+
+        <Route
+          path="/game/:genre"
+          render={(props) => {
+            return (
+              <GamesGenre {...props} isLogged={this.state.isLogged} />
             )
           }} />
 

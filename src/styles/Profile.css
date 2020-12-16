@@ -46,3 +46,8 @@
     font-size: x-small;
     color: #32383E;
 } 
+
+.bodyButton {
+    background-color: #32383E;
+    padding: 5px
+}

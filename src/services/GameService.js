@@ -26,7 +26,7 @@ class GameService {
 
   deleteFavGame = (gameID, userID) => {
     // console.log(gameID, userID)
-    console.log('hola 2')
+    // console.log('hola 2')
     return this.service.post(`/deleteFavGame/${gameID}`, { userID })
       .then(response => response.data)
 

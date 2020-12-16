@@ -4,6 +4,8 @@ import { Card, CardImg, CardBody, CardTitle, Badge } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
 
+import '../styles/Profile.css'
+
 class Profile extends React.Component {
 
     state = {
@@ -14,17 +16,11 @@ class Profile extends React.Component {
     service = new GameService()
 
     deleteFromFavoritos= (idGame) => {
-        // this.props.isLogged.favoritos.map((fav)=>{
-            
-        //     if (fav === idGame){ 
-        //         this.service.deleteFavGame(idGame, this.props.isLogged._id)
-        //     }
-        // })
-        console.log(idGame)
         
          this.service.deleteFavGame(idGame, this.props.isLogged._id)
             .then((result) => {
-                console.log(result)
+                
+                this.getFullFavorites()
             })
              .catch((err) => {
                 console.log(err)
@@ -77,11 +73,13 @@ class Profile extends React.Component {
                                 <div className="genre-badge">
                                     <Badge id="badge-genre">{games.genre}</Badge>
                                     
-                                    {/* <Badge id="badge-genre">{games.platform}</Badge> */}
+                                    <Badge id="badge-genre">{games.platform}</Badge>
                                 </div>
                             </CardBody>
                         </Link>
+                        <div className="bodyButton">
                         <Button color="danger" onClick={() => this.deleteFromFavoritos(games.id)} >x</Button>
+                        </div>
                     </Card>
                     
                 </div>

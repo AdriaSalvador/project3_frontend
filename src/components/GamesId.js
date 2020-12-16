@@ -5,6 +5,7 @@ import '../styles/GamesId.css'
 import { Spinner } from 'reactstrap';
 import { Button } from 'reactstrap';
 import { Badge } from 'reactstrap';
+// import { UncontrolledCarousel } from 'reactstrap';
 
 import GameService from '../services/GameService';
 
@@ -44,8 +45,13 @@ class GamesId extends React.Component {
     }
 
     stateImages = () => {
-        return this.state.gamesInfo.screenshots.map((images, index) => {
+        // console.log(this.state.gamesInfo.screenshots)
+        const items = this.state.gamesInfo.screenshots
+        // return (
+        // <UncontrolledCarousel items={items} />)
+        return items.map((images, index) => {
             return (
+                 
                 <img src={images.image} alt={this.state.gamesInfo.title} key={index} />
             )
         })
