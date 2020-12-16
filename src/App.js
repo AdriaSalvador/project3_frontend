@@ -4,7 +4,8 @@ import './App.css';
 //Dependencias
 import { Link, Route, Redirect } from 'react-router-dom';
 import { Button } from 'reactstrap';
-import { Navbar/*, NavItem, NavLink */ } from 'reactstrap';
+import { Navbar, NavbarBrand/*, NavItem, NavLink */ } from 'reactstrap';
+
 
 //Componentes
 // import Home from './components/Home';
@@ -107,10 +108,10 @@ class App extends React.Component {
 
           <span>{`Welcome, ${this.state.isLogged.username} `}</span>
           <Link to="/profile">
-            <Button color="dark">Profile</Button>
+            <Button color="dark" className="mr-2 ml-2">Profile</Button>
           </Link>
           <Link to="/logout">
-            <Button color="dark" onClick={this.logOut}>Log Out</Button>
+            <Button color="dark" onClick={this.logOut} className="mr-2">Log Out</Button>
           </Link>
 
         </div>
@@ -118,14 +119,14 @@ class App extends React.Component {
     } else {
       return (
 
-        <div>
+        <div className="navButtons">
 
           <Link to="/signup">
-            <Button color="dark">Sign Up</Button>
+            <Button color="dark" className="mr-2">Sign Up</Button>
           </Link>
 
           <Link to="/login">
-            <Button color="dark">Log In</Button>
+            <Button color="dark" className="mr-2">Log In</Button>
           </Link>
 
         </div>
@@ -141,10 +142,25 @@ class App extends React.Component {
 
       <div className="App">
 
+
+
         <Navbar fixed="top">
+          <div className="navButtons">
+        <NavbarBrand>
+      <img
+        src="/logo.png"
+        width="123"
+        height="30"
+        className="d-inline-block align-center"
+        alt="React Bootstrap logo"
+        
+      />
+    </NavbarBrand >
+          
           <Link to="/">
             <Button color="dark">Home Page</Button>
           </Link>
+        </div>  
 
           {this.renderButtons()}
         </Navbar>

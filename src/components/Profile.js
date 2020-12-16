@@ -2,6 +2,7 @@ import React from 'react'
 import GameService from '../services/GameService'
 import { Card, CardImg, CardBody, CardTitle, Badge } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Button } from 'reactstrap';
 
 class Profile extends React.Component {
 
@@ -48,12 +49,14 @@ class Profile extends React.Component {
                 <div>
                     <Link id="card-link" to={`/games/${games.id}`} key={index}>
                         <Card className="card border-dark">
+                        
                             <CardImg top width="100%" src={games.thumbnail} alt={games.title} />
                             <CardBody>
                                 <CardTitle id="card-title" tag="h5">{games.title}</CardTitle>
                                 <div className="genre-badge">
                                     <Badge id="badge-genre">{games.genre}</Badge>
-                                    <Badge id="badge-genre">{games.platform}</Badge>
+                                    <Button color="danger">x</Button>
+                                    {/* <Badge id="badge-genre">{games.platform}</Badge> */}
                                 </div>
                             </CardBody>
                         </Card>
