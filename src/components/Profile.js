@@ -22,6 +22,7 @@ class Profile extends React.Component {
                 
                 this.getFullFavorites()
                 this.renderFavorites()
+                winwow.location = '/profile'
             })
              .catch((err) => {
                 console.log(err)
