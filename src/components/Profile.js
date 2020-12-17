@@ -22,7 +22,7 @@ class Profile extends React.Component {
                 
                 this.getFullFavorites()
                 this.renderFavorites()
-                winwow.location = '/profile'
+                window.location = '/profile'
             })
              .catch((err) => {
                 console.log(err)
