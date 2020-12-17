@@ -14,7 +14,7 @@ class GamesGenre extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.match.params.genre)
+        // console.log(this.props.match.params.genre)
         fetch(`https://cors-anywhere.herokuapp.com/https://www.freetogame.com/api/games?category=${this.props.match.params.genre}`)
             .then((data) => {
                 return data.json()

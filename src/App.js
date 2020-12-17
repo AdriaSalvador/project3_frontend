@@ -5,7 +5,7 @@ import './App.css';
 import { Link, Route, Redirect } from 'react-router-dom';
 import { Button } from 'reactstrap';
 import { Navbar, NavbarBrand/*, NavItem, NavLink */ } from 'reactstrap';
-
+import { Alert } from 'reactstrap';
 
 //Componentes
 // import Home from './components/Home';
@@ -22,10 +22,20 @@ class App extends React.Component {
   state = {
     isLogged: {},
     newUser: { username: '', password: '' },
-    loggingUser: { username: '', password: '' }
+    loggingUser: { username: '', password: '' },
+    visible: false,
+    message: ''
   }
 
   service = new UserService();
+
+  onShowAlert = () => {
+    this.setState({ visible: true }, () => {
+      window.setTimeout(() => {
+        this.setState({ visible: false })
+      }, 2000)
+    });
+  }
 
   //SIGNUP CONFIG
 
@@ -34,10 +44,12 @@ class App extends React.Component {
     this.service
       .signup(this.state.newUser.username, this.state.newUser.password)
       .then((result) => {
-        console.log(result);
+        this.setState({ isLogged: result, message: 'Logged In' })
+        this.onShowAlert()
       })
       .catch((err) => {
-        console.log(err);
+        this.setState({message: err.response.data.message});
+        this.onShowAlert()
       });
 
   }
@@ -57,12 +69,14 @@ class App extends React.Component {
     this.service
       .login(this.state.loggingUser.username, this.state.loggingUser.password)
       .then((response) => {
-        // console.log(response)
-        this.setState({isLogged: response})
+
+        this.setState({ isLogged: response, message: 'Logged In' })
         // this.checkIfLoggedIn()
+        this.onShowAlert()
       })
       .catch((err) => {
-        console.log(err);
+        this.setState({message: err.response.data.message});
+        this.onShowAlert()
       });
   }
 
@@ -79,11 +93,14 @@ class App extends React.Component {
   logOut = () => {
     this.service.logout()
       .then((result) => {
-        console.log(result)
+        this.setState({message: 'Correctly disconnected' })
+        this.onShowAlert()
         this.checkIfLoggedIn()
+        
       })
       .catch((err) => {
-        console.log(err)
+        this.setState({message: err.response.data.message});
+        this.onShowAlert()
       })
   }
 
@@ -103,7 +120,7 @@ class App extends React.Component {
   //AUTH NAVBAR BUTTONS
 
   renderButtons = () => {
- 
+
     if (this.state.isLogged.username) {
       return (
 
@@ -147,21 +164,25 @@ class App extends React.Component {
 
         <Navbar fixed="top">
           <div className="navButtons">
-          <NavbarBrand>
-            <img
-              src="/logo.png"
-              width="123"
-              height="30"
-              className="d-inline-block align-center"
-              alt="React Bootstrap logo"
-            />
-          </NavbarBrand >
-          
-          <Link to="/">
-            <Button color="dark">Home Page</Button>
-          </Link>
-        </div>  
+            <NavbarBrand>
+              <img
+                src="/logo.png"
+                width="123"
+                height="30"
+                className="d-inline-block align-center"
+                alt="React Bootstrap logo"
+              />
+            </NavbarBrand >
 
+            <Link to="/">
+              <Button color="dark">Home Page</Button>
+            </Link>
+          </div>
+          <div className="alerta">
+            <Alert className="m-1 p-1" color="info" isOpen={this.state.visible} >
+              {this.state.message}
+            </Alert>
+          </div>
           {this.renderButtons()}
         </Navbar>
 

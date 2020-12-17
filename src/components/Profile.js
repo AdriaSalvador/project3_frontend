@@ -21,6 +21,7 @@ class Profile extends React.Component {
             .then((result) => {
                 
                 this.getFullFavorites()
+                this.renderFavorites()
             })
              .catch((err) => {
                 console.log(err)

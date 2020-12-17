@@ -5,6 +5,7 @@ import '../styles/GamesId.css'
 import { Spinner } from 'reactstrap';
 import { Button } from 'reactstrap';
 import { Badge } from 'reactstrap';
+import { Alert } from 'reactstrap';
 // import { UncontrolledCarousel } from 'reactstrap';
 
 import GameService from '../services/GameService';
@@ -14,7 +15,8 @@ import GameService from '../services/GameService';
 class GamesId extends React.Component {
 
     state = {
-        gamesInfo: []
+        gamesInfo: [],
+        visible : false
     }
 
     service = new GameService()
@@ -95,12 +97,27 @@ class GamesId extends React.Component {
         window.open(url)
     }
 
+    favouriteClickAlertAndAdd = () =>{
+        this.addToFavoritos()
+        this.onShowAlert()
+    }
+
     favouriteClick = () => {
         if (this.props.isLogged.username) {
             return (
-                <Button id="favourite-button" color="dark" onClick={() => this.addToFavoritos()}>Add to Favorites</Button>
+                <div>
+                    <Button id="favourite-button" color="dark" onClick={() => this.favouriteClickAlertAndAdd()}>Add to Favorites</Button>
+                </div>
             )
         }
+    }
+
+    onShowAlert = ()=>{
+        this.setState({visible:true},()=>{
+          window.setTimeout(()=>{
+            this.setState({visible:false})
+          },2000)
+        });
     }
 
     render() {
@@ -122,6 +139,11 @@ class GamesId extends React.Component {
                         <div className="buttons">
                             {this.favouriteClick()}
                             <Button id="playGame-button" color="dark" onClick={this.buttonClick}>Play Game</Button>
+                        </div>
+                        <div className="alerta">
+                            <Alert color="info" isOpen={this.state.visible} >
+                                Game added to favorites
+                            </Alert>
                         </div>
                     </div>
 
