@@ -16,13 +16,14 @@ class Profile extends React.Component {
     service = new GameService()
 
     deleteFromFavoritos= (idGame) => {
-        
+        console.log('hola')
          this.service.deleteFavGame(idGame, this.props.isLogged._id)
             .then((result) => {
-                
+                console.log('hola2')
                 this.getFullFavorites()
                 this.renderFavorites()
                 window.location = '/profile'
+                
             })
              .catch((err) => {
                 console.log(err)
@@ -44,7 +45,7 @@ class Profile extends React.Component {
 
     getFullFavorites = () => {
         const fav = this.state.favoritos.map((_id) => {
-            return fetch(`https://cors-anywhere.herokuapp.com/https://www.freetogame.com/api/game?id=${_id}`)
+            return fetch(`https://adria-proxy.herokuapp.com/videogames/${_id}`)
                 .then((data) => {
                     return data.json()
                 })

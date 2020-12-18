@@ -15,7 +15,7 @@ class GamesList extends React.Component {
     }
 
     componentDidMount() {
-        fetch('https://cors-anywhere.herokuapp.com/https://www.freetogame.com/api/games')
+        fetch('https://adria-proxy.herokuapp.com/videogames/all')
             .then((data) => {
                 return data.json()
             })
