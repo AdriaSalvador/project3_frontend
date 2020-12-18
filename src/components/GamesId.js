@@ -34,7 +34,7 @@ class GamesId extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`https://cors-anywhere.herokuapp.com/https://www.freetogame.com/api/game?id=${this.props.match.params.id}`)
+        fetch(`https://adriaproject3proxy.herokuapp.com/videogames/${this.props.match.params.id}`)
             .then((data) => {
                 return data.json()
             })

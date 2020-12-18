@@ -45,7 +45,7 @@ class Profile extends React.Component {
 
     getFullFavorites = () => {
         const fav = this.state.favoritos.map((_id) => {
-            return fetch(`https://adria-proxy.herokuapp.com/videogames/${_id}`)
+            return fetch(`https://adriaproject3proxy.herokuapp.com/videogames/${_id}`)
                 .then((data) => {
                     return data.json()
                 })
