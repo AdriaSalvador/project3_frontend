@@ -16,14 +16,10 @@ class Profile extends React.Component {
     service = new GameService()
 
     deleteFromFavoritos= (idGame) => {
-        console.log('hola')
+
          this.service.deleteFavGame(idGame, this.props.isLogged._id)
             .then((result) => {
-                console.log('hola2')
                 this.getFullFavorites()
-                this.renderFavorites()
-                window.location = '/profile'
-                
             })
              .catch((err) => {
                 console.log(err)
