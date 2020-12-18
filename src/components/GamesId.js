@@ -34,7 +34,7 @@ class GamesId extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`https://adriaproject3proxy.herokuapp.com/videogames/${this.props.match.params.id}`)
+        fetch(`https://adria-proxy.herokuapp.com/videogames/${this.props.match.params.id}`)
             .then((data) => {
                 return data.json()
             })

@@ -15,7 +15,7 @@ class GamesList extends React.Component {
     }
 
     componentDidMount() {
-        fetch('https://adriaproject3proxy.herokuapp.com/videogames/all')
+        fetch('https://adria-proxy.herokuapp.com/videogames/all')
             .then((data) => {
                 return data.json()
             })

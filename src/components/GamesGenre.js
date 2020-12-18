@@ -15,7 +15,7 @@ class GamesGenre extends React.Component {
 
     componentDidMount() {
         // console.log(this.props.match.params.genre)
-        fetch(`https://adriaproject3proxy.herokuapp.com/videogames/category/${this.props.match.params.genre}`)
+        fetch(`https://adria-proxy.herokuapp.com/videogames/category/${this.props.match.params.genre}`)
             .then((data) => {
                 return data.json()
             })
