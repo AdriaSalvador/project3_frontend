@@ -15,16 +15,16 @@ class Profile extends React.Component {
 
     service = new GameService()
 
-    deleteFromFavoritos= (idGame) => {
+    deleteFromFavoritos = (idGame) => {
 
-         this.service.deleteFavGame(idGame, this.props.isLogged._id)
+        this.service.deleteFavGame(idGame, this.props.isLogged._id)
             .then((result) => {
                 this.getFullFavorites()
             })
-             .catch((err) => {
+            .catch((err) => {
                 console.log(err)
-             })
-        
+            })
+
     }
 
 
@@ -59,11 +59,11 @@ class Profile extends React.Component {
     renderFavorites = () => {
 
         return this.state.favoritosFull.map((games, index) => {
-            
+
 
             return (
                 <div key={index}>
-                    
+
                     <Card className="card border-dark">
                         <Link id="card-link" to={`/games/${games.id}`} >
                             <CardImg top width="100%" src={games.thumbnail} alt={games.title} />
@@ -71,16 +71,16 @@ class Profile extends React.Component {
                                 <CardTitle id="card-title" tag="h5">{games.title}</CardTitle>
                                 <div className="genre-badge">
                                     <Badge id="badge-genre">{games.genre}</Badge>
-                                    
+
                                     <Badge id="badge-genre">{games.platform}</Badge>
                                 </div>
                             </CardBody>
                         </Link>
                         <div className="bodyButton">
-                        <Button color="danger" onClick={() => this.deleteFromFavoritos(games.id)} >x</Button>
+                            <Button color="danger" onClick={() => this.deleteFromFavoritos(games.id)} >x</Button>
                         </div>
                     </Card>
-                    
+
                 </div>
             )
         })
